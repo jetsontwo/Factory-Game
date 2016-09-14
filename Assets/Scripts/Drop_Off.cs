@@ -17,7 +17,7 @@ public class Drop_Off : MonoBehaviour {
     {
         score.text = "Money: $" + (current_money + price_per_box);
         PlayerPrefs.SetInt("money", current_money + price_per_box);
-        Destroy(c.gameObject);
+        c.gameObject.SetActive(false);
         
     }
 }

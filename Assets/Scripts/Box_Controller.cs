@@ -5,19 +5,23 @@ public class Box_Controller : MonoBehaviour {
 
     public float speed_mod, speed;
     private Rigidbody2D rb;
-    private GameObject touching_conveyor;
-    private Vector2 movement, dir_mod;
+    public GameObject touching_conveyor;
+    public Vector2 movement, dir_mod;
     private float dif_x, dif_y, move_x, move_y;
-    private bool reached_center, touched_end;
+    public bool reached_center, touched_end;
 
 
     // Use this for initialization
     void Start()
     {
-        touched_end = false;
         speed = .01f;
         speed_mod = 1;
         rb = gameObject.GetComponent<Rigidbody2D>();
+    }
+
+    void OnEnable()
+    {
+        touched_end = false;
     }
 
     // Update is called once per frame
@@ -80,7 +84,6 @@ public class Box_Controller : MonoBehaviour {
             if (c.tag == "end" && !touched_end)
             {
                 touching_conveyor = null;
-                rb.velocity = new Vector2(0, 0);
                 rb.gravityScale = 1;
                 rb.velocity = new Vector2(1.5f, 2);
                 rb.AddTorque(Random.Range(-500f,500f));
@@ -90,7 +93,6 @@ public class Box_Controller : MonoBehaviour {
             {
                 touching_conveyor = c.gameObject;
                 reached_center = false;
-                rb.velocity = new Vector2(0, 0);
                 rb.gravityScale = 0;
             }
         }
