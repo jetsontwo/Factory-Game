@@ -5,8 +5,9 @@ using System.Collections.Generic;
 public class Box_Spawn : MonoBehaviour {
 
     public GameObject box;
-    private int amount_pooled = 50;
-    private int timer = 0;
+    public int boxes_per_second = 0;
+    private int amount_pooled = 105;
+    private float timer = 0;
     List<GameObject> boxes;
 
     void Start()
@@ -23,12 +24,16 @@ public class Box_Spawn : MonoBehaviour {
     }
     void LateUpdate()
     {
-        if (timer >= 10)
+        if(boxes_per_second > 0)
         {
-            Send_Box();
-            timer = 0;
+            if (timer >= (1.0 / boxes_per_second))
+            {
+                Send_Box();
+                timer = 0;
+            }
+            timer += Time.deltaTime;
         }
-        timer++;
+        
     }
 
     void OnMouseUp()
