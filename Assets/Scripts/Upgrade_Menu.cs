@@ -9,20 +9,20 @@ public class Upgrade_Menu : MonoBehaviour {
     public Drop_Off do1;
     public Box_Spawn bs;
     private int money;
-    public int color_mod;
+    public float color_mod;
 
     void Start()
     {
         middle_width = Screen.width/2;
         middle_height = Screen.height/2;
-        better_goods_price[0] = 10 * color_mod;
-        better_goods_price[1] = 50 * color_mod;
-        better_goods_price[2] = 750 * color_mod;
-        better_goods_price[3] = 5000 * color_mod;
-        better_goods_price[4] = 75000 * color_mod;
-        better_goods_price[5] = 500000 * color_mod;
-        better_goods_price[6] = 10000000 * color_mod;
-        better_goods_price[7] = 500000000 * color_mod;
+        better_goods_price[0] = (int)(10 * color_mod);
+        better_goods_price[1] = (int)(50 * color_mod);
+        better_goods_price[2] = (int)(750 * color_mod);
+        better_goods_price[3] = (int)(5000 * color_mod);
+        better_goods_price[4] = (int)(75000 * color_mod);
+        better_goods_price[5] = (int)(500000 * color_mod);
+        better_goods_price[6] = (int)(10000000 * color_mod);
+        better_goods_price[7] = (int)(500000000 * color_mod);
 
     }
 	void OnGUI()
