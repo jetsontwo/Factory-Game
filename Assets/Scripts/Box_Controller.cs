@@ -86,7 +86,7 @@ public class Box_Controller : MonoBehaviour {
                 touching_conveyor = null;
                 rb.gravityScale = 1;
                 rb.velocity = new Vector2(1.5f, 2);
-                rb.AddTorque(Random.Range(-500f,500f));
+                rb.AddTorque(Random.Range(-500f, 500f));
                 touched_end = true;
             }
             else
