@@ -9,11 +9,13 @@ public class Box_Controller : MonoBehaviour {
     public Vector2 movement, dir_mod;
     private float dif_x, dif_y, move_x, move_y;
     public bool reached_center, touched_end;
+    public bool in_build_menu;
 
 
     // Use this for initialization
     void Start()
     {
+        in_build_menu = false;
         speed = .01f;
         speed_mod = 1;
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -22,12 +24,13 @@ public class Box_Controller : MonoBehaviour {
     void OnEnable()
     {
         touched_end = false;
+        touching_conveyor = null;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (touching_conveyor != null)
+        if (touching_conveyor != null && !in_build_menu)
         {
             if (!reached_center)
             {
@@ -97,6 +100,17 @@ public class Box_Controller : MonoBehaviour {
             }
         }
     }
+
+    //void OnTriggerExit2D(Collider2D c)
+    //{
+    //    RaycastHit2D rh;
+    //    rh = Physics2D.Raycast(transform.position, Vector2.zero, 0f, 5);
+    //    if (rh.collider == null)
+    //    {
+    //        touching_conveyor = null;
+    //        rb.velocity = new Vector2(0, 0);
+    //    }
+    //}
 
     private float Create_Center_Move_Values(float difference)
     {

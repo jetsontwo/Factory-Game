@@ -8,7 +8,7 @@ public class Box_Spawn : MonoBehaviour {
     public int boxes_per_second = 0;
     private int amount_pooled = 105;
     private float timer = 0;
-    List<GameObject> boxes;
+    private List<GameObject> boxes;
 
     void Start()
     {
@@ -56,6 +56,14 @@ public class Box_Spawn : MonoBehaviour {
                 break;
 
             }
+        }
+    }
+
+    public void Pause_Boxes()
+    {
+        for (int i = 0; i < boxes.Count; i++)
+        {
+            boxes[i].SetActive(false);
         }
     }
 }
