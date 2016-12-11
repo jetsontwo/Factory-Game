@@ -82,7 +82,7 @@ public class Box_Controller : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D c)
     {
-        if (c.tag != "box")
+        if (c.tag != "box" && c.tag != "Trash" && c.tag != "Finish")
         {
             if (c.tag == "end" && !touched_end)
             {
@@ -94,7 +94,26 @@ public class Box_Controller : MonoBehaviour {
             }
             else
             {
-                touching_conveyor = c.gameObject;
+                if (touching_conveyor == null)
+                    touching_conveyor = c.gameObject;
+                else if (touching_conveyor.tag == "right")
+                {
+                    if (c.gameObject.name == "Conveyor_Turn_Down" || c.gameObject.name == "Conveyor_Right")
+                        touching_conveyor = c.gameObject;
+                }
+
+                else if (touching_conveyor.tag == "down")
+                {
+                    if (c.gameObject.name == "Conveyor_Turn_Right" || c.gameObject.name == "Conveyor_Down")
+                        touching_conveyor = c.gameObject;
+                }
+                else
+                {
+                    rb.velocity = Vector3.zero;
+                    touching_conveyor = null;
+                }
+
+
                 reached_center = false;
                 rb.gravityScale = 0;
             }

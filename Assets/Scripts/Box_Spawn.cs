@@ -6,9 +6,10 @@ public class Box_Spawn : MonoBehaviour {
 
     public GameObject box;
     public int boxes_per_second = 0;
-    private int amount_pooled = 105;
+    private int amount_pooled = 300;
     private float timer = 0;
     private List<GameObject> boxes;
+    private bool can_send_boxes;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class Box_Spawn : MonoBehaviour {
             boxes.Add(obj);
         }
         PlayerPrefs.SetInt("money", 0);
+        can_send_boxes = true;
     }
     void LateUpdate()
     {
@@ -38,23 +40,27 @@ public class Box_Spawn : MonoBehaviour {
 
     void OnMouseUp()
     {
+
         Send_Box();
     }
 
     public void Send_Box()
     {
-        for(int i = 0; i < boxes.Count; i++)
+        if (can_send_boxes)
         {
-            if (!boxes[i].activeInHierarchy)
+            for (int i = 0; i < boxes.Count; i++)
             {
-                boxes[i].transform.position = transform.position;
-                boxes[i].transform.rotation = transform.rotation;
-                Rigidbody2D rb = boxes[i].GetComponent<Rigidbody2D>();
-                rb.velocity = new Vector2(0, 0);
-                rb.gravityScale = 1;
-                boxes[i].SetActive(true);
-                break;
+                if (!boxes[i].activeInHierarchy)
+                {
+                    boxes[i].transform.position = transform.position;
+                    boxes[i].transform.rotation = transform.rotation;
+                    Rigidbody2D rb = boxes[i].GetComponent<Rigidbody2D>();
+                    rb.velocity = new Vector2(0, 0);
+                    rb.gravityScale = 1;
+                    boxes[i].SetActive(true);
+                    break;
 
+                }
             }
         }
     }
@@ -65,5 +71,6 @@ public class Box_Spawn : MonoBehaviour {
         {
             boxes[i].SetActive(false);
         }
+        can_send_boxes = !can_send_boxes;
     }
 }
