@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Upgrade_Menu : MonoBehaviour {
 
@@ -8,8 +9,9 @@ public class Upgrade_Menu : MonoBehaviour {
     private int[] better_goods_price = new int[8];
     public Drop_Off do1;
     public Box_Spawn bs;
-    private int money;
+    private int money, drop1_mult_count;
     public float color_mod;
+    public Text drop1_mult;
 
     void Start()
     {
@@ -23,7 +25,8 @@ public class Upgrade_Menu : MonoBehaviour {
         better_goods_price[5] = (int)(500000 * color_mod);
         better_goods_price[6] = (int)(10000000 * color_mod);
         better_goods_price[7] = (int)(500000000 * color_mod);
-
+        drop1_mult_count = 0;
+        drop1_mult.text = "x" + drop1_mult_count;
     }
 	void OnGUI()
     {
@@ -36,10 +39,12 @@ public class Upgrade_Menu : MonoBehaviour {
         }
         if (GUI.Button(new Rect(middle_width+100, middle_height, 200, 50), "Auto Drop: $100"))
         {
-            if (bs.boxes_per_second < 20)
+            if (bs.boxes_per_second < 10)
             {
                 print(bs.boxes_per_second + 1);
                 bs.boxes_per_second += 1;
+                drop1_mult_count++;
+                drop1_mult.text = "x" + drop1_mult_count;
             }
         }
     }
